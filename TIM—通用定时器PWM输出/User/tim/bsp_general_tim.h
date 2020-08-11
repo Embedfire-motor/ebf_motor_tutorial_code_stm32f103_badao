@@ -7,16 +7,15 @@
 /*ºê¶¨Òå*/
 
 #define GENERAL_TIM                        	TIM2
-#define GENERAL_TIM_GPIO_AF                 GPIO_AF1_TIM2
 #define GENERAL_TIM_CLK_ENABLE()  					__HAL_RCC_TIM2_CLK_ENABLE()
 
 
 /*PWMÒý½Å*/
-#define GENERAL_TIM_CH1_GPIO_PORT           GPIOB
-#define GENERAL_TIM_CH1_PIN                 GPIO_PIN_5
+#define GENERAL_TIM_CH1_GPIO_PORT           GPIOA
+#define GENERAL_TIM_CH1_PIN                 GPIO_PIN_0
 
-#define GENERAL_TIM_CH2_GPIO_PORT           GPIOB
-#define GENERAL_TIM_CH2_PIN                 GPIO_PIN_0
+#define GENERAL_TIM_CH2_GPIO_PORT           GPIOA
+#define GENERAL_TIM_CH2_PIN                 GPIO_PIN_1
 
 extern void TIMx_Configuration(void);
 extern void TIM2_SetPWM_pulse(int channel,int compare);

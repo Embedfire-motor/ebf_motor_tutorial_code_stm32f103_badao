@@ -29,30 +29,42 @@ __IO float Frequency = 0;
   * @param  无
   * @retval 无
   */
+static void TIMx_PWMGPIO_Cong(void) 
+{
+ GPIO_InitTypeDef GPIO_InitStruct;
+  
+  /* 定时器通道功能引脚端口时钟使能 */
+  GENERAL_OCPWM_GPIO_CLK_ENABLE();
+  
+  /* 定时器通道1功能引脚IO初始化 */
+	/*设置输出类型*/
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+	/*设置引脚速率 */ 
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+	/*选择要控制的GPIO引脚*/	
+	GPIO_InitStruct.Pin = GENERAL_OCPWM_PIN;
+  HAL_GPIO_Init(GENERAL_OCPWM_GPIO_PORT, &GPIO_InitStruct);
+}
+
+
+
+/**
+  * @brief  配置TIM复用输入捕获时用到的I/O
+  * @param  无
+  * @retval 无
+  */
 static void TIMx_GPIO_Config(void) 
 {
   /*定义一个GPIO_InitTypeDef类型的结构体*/
   GPIO_InitTypeDef GPIO_InitStructure;
-
   /*开启定时器相关的GPIO外设时钟*/
-  GENERAL_OCPWM_GPIO_CLK_ENABLE();
   ADVANCE_ICPWM_GPIO_CLK_ENABLE(); 
-
-  /* 定时器功能引脚初始化 */
-  /* 通用定时器PWM输出引脚 */  
-  GPIO_InitStructure.Pin = GENERAL_OCPWM_PIN; 
-  GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;    
-  GPIO_InitStructure.Pull = GPIO_NOPULL;
-  GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;   
-  HAL_GPIO_Init(GENERAL_OCPWM_GPIO_PORT, &GPIO_InitStructure);
-  
   /* 高级定时器输入捕获引脚 */
   GPIO_InitStructure.Pin = ADVANCE_ICPWM_PIN;
 	GPIO_InitStructure.Mode = GPIO_MODE_INPUT;    
   GPIO_InitStructure.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(ADVANCE_ICPWM_GPIO_PORT, &GPIO_InitStructure);
+  HAL_GPIO_Init(ADVANCE_ICPWM_GPIO_PORT, &GPIO_InitStructure);	
 }
-
  /**
   * @brief  高级控制定时器 TIMx,x[1,8]中断优先级配置
   * @param  无
@@ -78,41 +90,49 @@ static void TIMx_NVIC_Configuration(void)
  * TIM_RepetitionCounter TIMx,x[1,8]才有(高级定时器)
  *-----------------------------------------------------------------------------
  */
+TIM_HandleTypeDef  TIM_TimeBaseStructure;
 static void TIM_PWMOUTPUT_Config(void)
-{ 
-  TIM_OC_InitTypeDef TIM_OCInitStructure;
-  // 开启TIMx_CLK,x[2,3,4,5,12,13,14] 
-  GENERAL_TIM_CLK_ENABLE(); 
-  /* 定义定时器的句柄即确定定时器寄存器的基地址*/
-  TIM_PWMOUTPUT_Handle.Instance = GENERAL_TIM;
-  /* 累计 TIM_Period个后产生一个更新或者中断*/    
-  //当定时器从0计数到9999，即为10000次，为一个定时周期
-  TIM_PWMOUTPUT_Handle.Init.Period = 500-1;
-  // 高级控制定时器时钟源TIMxCLK = HCLK=72MHz 
-  // 设定定时器频率为=TIMxCLK/(TIM_Prescaler+1)=100KHz
-  TIM_PWMOUTPUT_Handle.Init.Prescaler = 7200-1; 
-  // 采样时钟分频
-  TIM_PWMOUTPUT_Handle.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;
-  // 计数方式
-  TIM_PWMOUTPUT_Handle.Init.CounterMode=TIM_COUNTERMODE_UP;
-  // 重复计数器
-  TIM_PWMOUTPUT_Handle.Init.RepetitionCounter=0;  
-  // 初始化定时器TIMx, x[1,8]
-  HAL_TIM_PWM_Init(&TIM_PWMOUTPUT_Handle);
-
-  /*PWM模式配置*/
-  //配置为PWM模式1
-  TIM_OCInitStructure.OCMode = TIM_OCMODE_PWM1;
-  TIM_OCInitStructure.Pulse = 250;
-  TIM_OCInitStructure.OCPolarity = TIM_OCPOLARITY_HIGH;
-  TIM_OCInitStructure.OCNPolarity = TIM_OCNPOLARITY_HIGH;
-  TIM_OCInitStructure.OCIdleState = TIM_OCIDLESTATE_SET;
-  TIM_OCInitStructure.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-  //初始化通道3输出PWM 
-  HAL_TIM_PWM_ConfigChannel(&TIM_PWMOUTPUT_Handle,&TIM_OCInitStructure,TIM_CHANNEL_3);
-
-  /* 定时器通道3输出PWM */
-  HAL_TIM_PWM_Start(&TIM_PWMOUTPUT_Handle,TIM_CHANNEL_3);
+{
+  TIM_OC_InitTypeDef  TIM_OCInitStructure;  
+	
+  /*使能定时器*/
+  GENERAL_TIM_CLK_ENABLE();
+	
+  TIM_TimeBaseStructure.Instance = GENERAL_TIM;
+  /* 累计 TIM_Period个后产生一个更新或者中断*/		
+  //当定时器从0计数到5000，即为5000次，为一个定时周期
+	TIM_TimeBaseStructure.Init.Period = 5000-1;
+	//定时器时钟源TIMxCLK = 2 * PCLK1  
+	//				PCLK1 = HCLK / 2 
+	//				=> TIMxCLK=HCLK/2=SystemCoreClock/2*2=72MHz
+	// 设定定时器频率为=TIMxCLK/(TIM_Prescaler+1)=10KHz
+  TIM_TimeBaseStructure.Init.Prescaler = 720-1;	
+	/*计数方式*/
+  TIM_TimeBaseStructure.Init.CounterMode = TIM_COUNTERMODE_UP;
+	/*采样时钟分频*/
+  TIM_TimeBaseStructure.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;
+	/*初始化定时器*/
+  HAL_TIM_PWM_Init(&TIM_TimeBaseStructure);
+  
+	/*PWM模式配置*/
+  TIM_OCInitStructure.OCMode = TIM_OCMODE_PWM1;//配置为PWM模式1
+  TIM_OCInitStructure.Pulse = 2500;//默认占空比为50%
+  TIM_OCInitStructure.OCFastMode = TIM_OCFAST_DISABLE;
+	/*当定时器计数值小于CCR1_Val时为高电平*/
+  TIM_OCInitStructure.OCPolarity = TIM_OCPOLARITY_HIGH;	
+	
+	/*配置PWM通道*/
+  HAL_TIM_PWM_ConfigChannel(&TIM_TimeBaseStructure, &TIM_OCInitStructure, TIM_CHANNEL_1);
+	/*开始输出PWM*/
+	HAL_TIM_PWM_Start(&TIM_TimeBaseStructure,TIM_CHANNEL_1);
+	
+	/*配置脉宽*/
+  TIM_OCInitStructure.Pulse = 2500;//默认占空比为50%
+	/*配置PWM通道*/
+  HAL_TIM_PWM_ConfigChannel(&TIM_TimeBaseStructure, &TIM_OCInitStructure, TIM_CHANNEL_2);
+	/*开始输出PWM*/
+	HAL_TIM_PWM_Start(&TIM_TimeBaseStructure,TIM_CHANNEL_2);
+	
 
 }
     
@@ -168,6 +188,8 @@ static void TIM_PWMINPUT_Config(void)
   */
 void TIMx_Configuration(void)
 {
+	TIMx_PWMGPIO_Cong();
+	
   TIMx_GPIO_Config();
   
   TIMx_NVIC_Configuration();  

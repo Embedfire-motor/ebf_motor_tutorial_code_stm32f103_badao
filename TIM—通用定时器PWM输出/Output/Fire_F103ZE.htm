@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\Output\Fire_F103ZE.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\Output\Fire_F103ZE.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Aug 11 10:49:06 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Aug 11 15:57:44 2020
 <BR><P>
 <H3>Maximum Stack Usage =          0 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -375,24 +375,24 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
 
-<P><STRONG><a name="[59]"></a>HAL_TIM_Base_Init</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.HAL_TIM_Base_Init))
-<BR><BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_MspInit
-<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
+<P><STRONG><a name="[59]"></a>HAL_TIM_PWM_ConfigChannel</STRONG> (Thumb, 264 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_ConfigChannel))
+<BR><BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC4_SetConfig
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC3_SetConfig
+<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1_SetConfig
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC2_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_PWMOUTPUT_Config
 </UL>
 
-<P><STRONG><a name="[5a]"></a>HAL_TIM_Base_MspInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.HAL_TIM_Base_MspInit))
-<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Init
-</UL>
-
-<P><STRONG><a name="[5c]"></a>HAL_TIM_PWM_ConfigChannel</STRONG> (Thumb, 264 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_ConfigChannel))
-<BR><BR>[Calls]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC4_SetConfig
-<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC3_SetConfig
-<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1_SetConfig
-<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC2_SetConfig
+<P><STRONG><a name="[5e]"></a>HAL_TIM_PWM_Init</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_Init))
+<BR><BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_MspInit
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_PWMOUTPUT_Config
+</UL>
+
+<P><STRONG><a name="[5f]"></a>HAL_TIM_PWM_MspInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_MspInit))
+<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Init
 </UL>
 
 <P><STRONG><a name="[61]"></a>HAL_TIM_PWM_Start</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_Start))
@@ -434,16 +434,16 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[5b]"></a>TIM_Base_SetConfig</STRONG> (Thumb, 134 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.TIM_Base_SetConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Init
+<P><STRONG><a name="[60]"></a>TIM_Base_SetConfig</STRONG> (Thumb, 134 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.TIM_Base_SetConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Init
 </UL>
 
 <P><STRONG><a name="[62]"></a>TIM_CCxChannelCmd</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.TIM_CCxChannelCmd))
 <BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Start
 </UL>
 
-<P><STRONG><a name="[5e]"></a>TIM_OC2_SetConfig</STRONG> (Thumb, 114 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.TIM_OC2_SetConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_ConfigChannel
+<P><STRONG><a name="[5b]"></a>TIM_OC2_SetConfig</STRONG> (Thumb, 114 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.TIM_OC2_SetConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_ConfigChannel
 </UL>
 
 <P><STRONG><a name="[69]"></a>TIMx_Configuration</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, bsp_general_tim.o(i.TIMx_Configuration))
@@ -480,16 +480,16 @@ Local Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
 </UL>
 
-<P><STRONG><a name="[5d]"></a>TIM_OC1_SetConfig</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.TIM_OC1_SetConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_ConfigChannel
+<P><STRONG><a name="[5a]"></a>TIM_OC1_SetConfig</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.TIM_OC1_SetConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_ConfigChannel
 </UL>
 
-<P><STRONG><a name="[5f]"></a>TIM_OC3_SetConfig</STRONG> (Thumb, 112 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.TIM_OC3_SetConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_ConfigChannel
+<P><STRONG><a name="[5c]"></a>TIM_OC3_SetConfig</STRONG> (Thumb, 112 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.TIM_OC3_SetConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_ConfigChannel
 </UL>
 
-<P><STRONG><a name="[60]"></a>TIM_OC4_SetConfig</STRONG> (Thumb, 74 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.TIM_OC4_SetConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_ConfigChannel
+<P><STRONG><a name="[5d]"></a>TIM_OC4_SetConfig</STRONG> (Thumb, 74 bytes, Stack size 0 bytes, stm32f1xx_hal_tim.o(i.TIM_OC4_SetConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_ConfigChannel
 </UL>
 
 <P><STRONG><a name="[66]"></a>SystemClock_Config</STRONG> (Thumb, 96 bytes, Stack size 0 bytes, main.o(i.SystemClock_Config))
@@ -501,9 +501,9 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[68]"></a>TIM_PWMOUTPUT_Config</STRONG> (Thumb, 134 bytes, Stack size 0 bytes, bsp_general_tim.o(i.TIM_PWMOUTPUT_Config))
-<BR><BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Init
-<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Start
-<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_ConfigChannel
+<BR><BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Start
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Init
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_ConfigChannel
 </UL>
 <BR>[Called By]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMx_Configuration
 </UL>

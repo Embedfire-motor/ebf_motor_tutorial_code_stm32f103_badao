@@ -1271,7 +1271,7 @@ Section Cross References
     stm32f1xx_it.o(i.SysTick_Handler) refers to stm32f1xx_hal.o(i.HAL_IncTick) for HAL_IncTick
     bsp_led.o(i.LED_GPIO_Config) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_Init) for HAL_GPIO_Init
     bsp_general_tim.o(i.TIM2_SetPWM_pulse) refers to bsp_general_tim.o(.bss) for TIM_TimeBaseStructure
-    bsp_general_tim.o(i.TIM_PWMOUTPUT_Config) refers to stm32f1xx_hal_tim.o(i.HAL_TIM_Base_Init) for HAL_TIM_Base_Init
+    bsp_general_tim.o(i.TIM_PWMOUTPUT_Config) refers to stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_Init) for HAL_TIM_PWM_Init
     bsp_general_tim.o(i.TIM_PWMOUTPUT_Config) refers to stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_ConfigChannel) for HAL_TIM_PWM_ConfigChannel
     bsp_general_tim.o(i.TIM_PWMOUTPUT_Config) refers to stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_Start) for HAL_TIM_PWM_Start
     bsp_general_tim.o(i.TIM_PWMOUTPUT_Config) refers to bsp_general_tim.o(.bss) for TIM_TimeBaseStructure
@@ -2105,7 +2105,9 @@ Removing Unused input sections from the image.
     Removing stm32f1xx_hal_tim.o(.rrx_text), (6 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_Base_DeInit), (70 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_Base_GetState), (8 bytes).
+    Removing stm32f1xx_hal_tim.o(i.HAL_TIM_Base_Init), (52 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_Base_MspDeInit), (2 bytes).
+    Removing stm32f1xx_hal_tim.o(i.HAL_TIM_Base_MspInit), (2 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_Base_Start), (42 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_Base_Start_DMA), (136 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_Base_Start_IT), (42 bytes).
@@ -2172,9 +2174,7 @@ Removing Unused input sections from the image.
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_OnePulse_Stop_IT), (164 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_DeInit), (70 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_GetState), (8 bytes).
-    Removing stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_Init), (52 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_MspDeInit), (2 bytes).
-    Removing stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_MspInit), (2 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_PulseFinishedCallback), (2 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_PulseFinishedHalfCpltCallback), (2 bytes).
     Removing stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_Start_DMA), (376 bytes).
@@ -2630,9 +2630,9 @@ Image Symbol Table
     i.HAL_RCC_GetSysClockFreq                0x08000770   Section        0  stm32f1xx_hal_rcc.o(i.HAL_RCC_GetSysClockFreq)
     i.HAL_RCC_OscConfig                      0x08000804   Section        0  stm32f1xx_hal_rcc.o(i.HAL_RCC_OscConfig)
     i.HAL_SYSTICK_Config                     0x08000c68   Section        0  stm32f1xx_hal_cortex.o(i.HAL_SYSTICK_Config)
-    i.HAL_TIM_Base_Init                      0x08000c9c   Section        0  stm32f1xx_hal_tim.o(i.HAL_TIM_Base_Init)
-    i.HAL_TIM_Base_MspInit                   0x08000cd0   Section        0  stm32f1xx_hal_tim.o(i.HAL_TIM_Base_MspInit)
-    i.HAL_TIM_PWM_ConfigChannel              0x08000cd2   Section        0  stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_ConfigChannel)
+    i.HAL_TIM_PWM_ConfigChannel              0x08000c9c   Section        0  stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_ConfigChannel)
+    i.HAL_TIM_PWM_Init                       0x08000da4   Section        0  stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_Init)
+    i.HAL_TIM_PWM_MspInit                    0x08000dd8   Section        0  stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_MspInit)
     i.HAL_TIM_PWM_Start                      0x08000ddc   Section        0  stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_Start)
     i.HardFault_Handler                      0x08000e34   Section        0  stm32f1xx_it.o(i.HardFault_Handler)
     i.LED_GPIO_Config                        0x08000e38   Section        0  bsp_led.o(i.LED_GPIO_Config)
@@ -2780,9 +2780,9 @@ Image Symbol Table
     HAL_RCC_GetSysClockFreq                  0x08000771   Thumb Code   116  stm32f1xx_hal_rcc.o(i.HAL_RCC_GetSysClockFreq)
     HAL_RCC_OscConfig                        0x08000805   Thumb Code  1114  stm32f1xx_hal_rcc.o(i.HAL_RCC_OscConfig)
     HAL_SYSTICK_Config                       0x08000c69   Thumb Code    52  stm32f1xx_hal_cortex.o(i.HAL_SYSTICK_Config)
-    HAL_TIM_Base_Init                        0x08000c9d   Thumb Code    52  stm32f1xx_hal_tim.o(i.HAL_TIM_Base_Init)
-    HAL_TIM_Base_MspInit                     0x08000cd1   Thumb Code     2  stm32f1xx_hal_tim.o(i.HAL_TIM_Base_MspInit)
-    HAL_TIM_PWM_ConfigChannel                0x08000cd3   Thumb Code   264  stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_ConfigChannel)
+    HAL_TIM_PWM_ConfigChannel                0x08000c9d   Thumb Code   264  stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_ConfigChannel)
+    HAL_TIM_PWM_Init                         0x08000da5   Thumb Code    52  stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_Init)
+    HAL_TIM_PWM_MspInit                      0x08000dd9   Thumb Code     2  stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_MspInit)
     HAL_TIM_PWM_Start                        0x08000ddd   Thumb Code    80  stm32f1xx_hal_tim.o(i.HAL_TIM_PWM_Start)
     HardFault_Handler                        0x08000e35   Thumb Code     4  stm32f1xx_it.o(i.HardFault_Handler)
     LED_GPIO_Config                          0x08000e39   Thumb Code   150  bsp_led.o(i.LED_GPIO_Config)
@@ -2852,9 +2852,9 @@ Memory Map of the image
     0x08000770   0x08000770   0x00000094   Code   RO          588    i.HAL_RCC_GetSysClockFreq  stm32f1xx_hal_rcc.o
     0x08000804   0x08000804   0x00000464   Code   RO          591    i.HAL_RCC_OscConfig  stm32f1xx_hal_rcc.o
     0x08000c68   0x08000c68   0x00000034   Code   RO          145    i.HAL_SYSTICK_Config  stm32f1xx_hal_cortex.o
-    0x08000c9c   0x08000c9c   0x00000034   Code   RO          826    i.HAL_TIM_Base_Init  stm32f1xx_hal_tim.o
-    0x08000cd0   0x08000cd0   0x00000002   Code   RO          828    i.HAL_TIM_Base_MspInit  stm32f1xx_hal_tim.o
-    0x08000cd2   0x08000cd2   0x00000108   Code   RO          893    i.HAL_TIM_PWM_ConfigChannel  stm32f1xx_hal_tim.o
+    0x08000c9c   0x08000c9c   0x00000108   Code   RO          893    i.HAL_TIM_PWM_ConfigChannel  stm32f1xx_hal_tim.o
+    0x08000da4   0x08000da4   0x00000034   Code   RO          896    i.HAL_TIM_PWM_Init  stm32f1xx_hal_tim.o
+    0x08000dd8   0x08000dd8   0x00000002   Code   RO          898    i.HAL_TIM_PWM_MspInit  stm32f1xx_hal_tim.o
     0x08000dda   0x08000dda   0x00000002   PAD
     0x08000ddc   0x08000ddc   0x00000058   Code   RO          901    i.HAL_TIM_PWM_Start  stm32f1xx_hal_tim.o
     0x08000e34   0x08000e34   0x00000004   Code   RO         1206    i.HardFault_Handler  stm32f1xx_it.o

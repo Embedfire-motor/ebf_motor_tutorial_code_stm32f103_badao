@@ -43,8 +43,8 @@ int main(void)
   /* 通用定时器初始化并配置PWM输出功能 */
   TIMx_Configuration();
   
-	TIM2_SetPWM_pulse(1,30000);
-	TIM2_SetPWM_pulse(2,20000);
+	TIM2_SetPWM_pulse(1,3000);
+	TIM2_SetPWM_pulse(2,2000);
 	
 	while(1)
 	{

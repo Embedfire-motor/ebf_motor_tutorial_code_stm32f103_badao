@@ -51,6 +51,7 @@ static void TIMx_GPIO_Config(void)
 	GPIO_InitStructure.Mode = GPIO_MODE_INPUT;
 	GPIO_InitStructure.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(ADVANCE_BKIN_GPIO_PORT, &GPIO_InitStructure);
+	
 }
 
 /*

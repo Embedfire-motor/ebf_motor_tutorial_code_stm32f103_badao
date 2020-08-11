@@ -25,7 +25,7 @@ int main(void)
 {
   /*初始化时基*/
   HAL_InitTick(5);
-	/* 初始化系统时钟为168MHz */
+	/* 初始化系统时钟为72MHz */
 	SystemClock_Config();
 	/* 初始化LED */
 	LED_GPIO_Config();
@@ -34,19 +34,7 @@ int main(void)
   
 	while(1)
 	{
-//    /*修改比较输出的计数值*/
-//    OC_Pulse_num_Channel1 += 200;
-//    OC_Pulse_num_Channel2 += 120;
-//    
-//    if(OC_Pulse_num_Channel1 == 6000)
-//    {
-//      OC_Pulse_num_Channel1 = 100;
-//    }
-//    else if(OC_Pulse_num_Channel2 == 6000)
-//    {
-//      OC_Pulse_num_Channel2 = 200;
-//    }
-//    delay_ms(10);
+
 	}
 }
 

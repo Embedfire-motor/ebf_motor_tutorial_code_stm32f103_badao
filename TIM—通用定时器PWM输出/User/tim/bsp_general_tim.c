@@ -30,23 +30,20 @@ static void TIMx_GPIO_Config(void)
  GPIO_InitTypeDef GPIO_InitStruct;
   
   /* 定时器通道功能引脚端口时钟使能 */
-	
-	__HAL_RCC_GPIOB_CLK_ENABLE();
+	__HAL_RCC_GPIOA_CLK_ENABLE();
   
   /* 定时器通道1功能引脚IO初始化 */
 	/*设置输出类型*/
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
 	/*设置引脚速率 */ 
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-	
 	/*选择要控制的GPIO引脚*/	
 	GPIO_InitStruct.Pin = GENERAL_TIM_CH1_PIN;
-	/*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
   HAL_GPIO_Init(GENERAL_TIM_CH1_GPIO_PORT, &GPIO_InitStruct);
 
   GPIO_InitStruct.Pin = GENERAL_TIM_CH2_PIN;	
   HAL_GPIO_Init(GENERAL_TIM_CH2_GPIO_PORT, &GPIO_InitStruct);
-	
+
 }
 
 
@@ -66,27 +63,26 @@ TIM_HandleTypeDef  TIM_TimeBaseStructure;
 static void TIM_PWMOUTPUT_Config(void)
 {
   TIM_OC_InitTypeDef  TIM_OCInitStructure;  
-	int tim_per=50000;//定时器周期
+	int tim_per=5000;//定时器周期
 	
   /*使能定时器*/
   GENERAL_TIM_CLK_ENABLE();
 	
   TIM_TimeBaseStructure.Instance = GENERAL_TIM;
   /* 累计 TIM_Period个后产生一个更新或者中断*/		
-  //当定时器从0计数到50000，即为50000次，为一个定时周期
+  //当定时器从0计数到5000，即为5000次，为一个定时周期
 	TIM_TimeBaseStructure.Init.Period = tim_per;
 	//定时器时钟源TIMxCLK = 2 * PCLK1  
 	//				PCLK1 = HCLK / 2 
 	//				=> TIMxCLK=HCLK/2=SystemCoreClock/2*2=72MHz
 	// 设定定时器频率为=TIMxCLK/(TIM_Prescaler+1)=10KHz
   TIM_TimeBaseStructure.Init.Prescaler = 7200-1;	
-	
 	/*计数方式*/
   TIM_TimeBaseStructure.Init.CounterMode = TIM_COUNTERMODE_UP;
 	/*采样时钟分频*/
   TIM_TimeBaseStructure.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;
 	/*初始化定时器*/
-  HAL_TIM_Base_Init(&TIM_TimeBaseStructure);
+  HAL_TIM_PWM_Init(&TIM_TimeBaseStructure);
   
 	/*PWM模式配置*/
   TIM_OCInitStructure.OCMode = TIM_OCMODE_PWM1;//配置为PWM模式1
