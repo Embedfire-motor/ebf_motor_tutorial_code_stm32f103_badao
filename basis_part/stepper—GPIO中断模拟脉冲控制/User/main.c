@@ -4,7 +4,7 @@
   * @author  fire
   * @version V1.0
   * @date    2020-xx-xx
-  * @brief   TIM—高级定时器互补输出
+  * @brief   stepper-GPIO中断模拟脉冲控制
   ******************************************************************************
   * @attention
   *
@@ -35,7 +35,7 @@ int main(void)
   int dir_val=0;
   int en_val=0;
 
-  /* 初始化系统时钟为168MHz */
+  /* 初始化系统时钟为72MHz */
   SystemClock_Config();
   /*初始化USART 配置模式为 115200 8-N-1，中断接收*/
   DEBUG_USART_Config();
