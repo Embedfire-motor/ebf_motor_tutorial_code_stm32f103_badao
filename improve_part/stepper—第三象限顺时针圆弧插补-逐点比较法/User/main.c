@@ -33,7 +33,7 @@
 int main(void) 
 {
   HAL_InitTick(0);
-	/* 初始化系统时钟为168MHz */
+	/* 初始化系统时钟为72MHz */
 	SystemClock_Config();
 	/*初始化USART 配置模式为 115200 8-N-1，中断接收*/
 	DEBUG_USART_Config();
