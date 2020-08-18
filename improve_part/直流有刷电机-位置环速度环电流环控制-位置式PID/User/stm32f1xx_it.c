@@ -192,7 +192,6 @@ void BASIC_TIM_IRQHandler (void)
 }
 
 uint8_t dr;
-uint8_t count11;
 volatile uint8_t sr_status;
 /**
   * @brief 串口中断服务函数

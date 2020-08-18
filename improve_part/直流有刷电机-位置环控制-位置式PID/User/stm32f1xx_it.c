@@ -192,12 +192,13 @@ void BASIC_TIM_IRQHandler (void)
 }
 
 uint8_t dr;
-
+volatile uint8_t sr_status;
 /**
   * @brief 串口中断服务函数
   */
 void DEBUG_USART_IRQHandler(void)
 {
+	sr_status = UartHandle.Instance->SR & (1<<3);//clear SR register ORE bit status
 	dr = UartHandle.Instance->DR;
   protocol_data_recv(&dr, 1);
   HAL_UART_IRQHandler(&UartHandle);

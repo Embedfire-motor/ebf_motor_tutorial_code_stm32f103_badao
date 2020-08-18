@@ -17,11 +17,11 @@
   
 /*********************** 电流采集 ******************/
 // ADC GPIO 宏定义
-#define CURR_ADC_GPIO_PORT              GPIOB
-#define CURR_ADC_GPIO_PIN               GPIO_PIN_1
-#define CURR_ADC_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOB_CLK_ENABLE()
+#define CURR_ADC_GPIO_PORT              GPIOC
+#define CURR_ADC_GPIO_PIN               GPIO_PIN_2
+#define CURR_ADC_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE()
 
-#define CURR_ADC_CHANNEL                ADC_CHANNEL_9
+#define CURR_ADC_CHANNEL                ADC_CHANNEL_12
 
 // ADC DR寄存器宏定义，ADC转换后的数字值则存放在这里
 #define CURR_ADC_DR_ADDR                ((uint32_t)ADC1+0x4c)
@@ -37,11 +37,11 @@
 
 /*********************** 电源电压采集 ******************/
 
-#define VBUS_GPIO_PORT                  GPIOB
-#define VBUS_GPIO_PIN                   GPIO_PIN_0
-#define VBUS_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOB_CLK_ENABLE()
+#define VBUS_GPIO_PORT                  GPIOC
+#define VBUS_GPIO_PIN                   GPIO_PIN_4
+#define VBUS_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOC_CLK_ENABLE()
 
-#define VBUS_ADC_CHANNEL                ADC_CHANNEL_8
+#define VBUS_ADC_CHANNEL                ADC_CHANNEL_14
 
 #define VBUS_MAX                        30    // 电压最大值
 #define VBUS_MIN                        10    // 电压最小值
