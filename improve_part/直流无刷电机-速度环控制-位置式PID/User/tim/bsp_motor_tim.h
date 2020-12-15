@@ -3,7 +3,7 @@
 
 #include "stm32f1xx.h"
 #include "./led/bsp_led.h"   
-#include ".\motor_control\bsp_motor_control.h"
+#include ".\bldcm_control\bsp_bldcm_control.h"
 #include <stdio.h>
 
 /* 电机控旋转实现结构体 */
@@ -13,7 +13,7 @@
 typedef struct
 {
   int32_t timeout;            // 定时器更新计数
-  float speed;                // 电机速度 rps（转/秒）
+  float speed;                // 电机速度 rps（转/分钟）
   int32_t enable_flag;        // 电机使能标志
   int32_t speed_group[SPEED_FILTER_NUM];
 }motor_rotate_t;
@@ -101,7 +101,6 @@ extern TIM_HandleTypeDef htimx_hall;
 
 #define HALL_TIM_IRQn                    TIM4_IRQn
 #define HALL_TIM_IRQHandler              TIM4_IRQHandler
-
 extern TIM_HandleTypeDef TIM_TimeBaseStructure;
 
 void PWM_TIMx_Configuration(void);
