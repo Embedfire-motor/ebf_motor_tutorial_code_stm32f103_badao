@@ -36,10 +36,10 @@
 /*********************** 电源电压采集 ******************/
 
 #define VBUS_GPIO_PORT                  GPIOC
-#define VBUS_GPIO_PIN                   GPIO_PIN_1
+#define VBUS_GPIO_PIN                   GPIO_PIN_4
 #define VBUS_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOC_CLK_ENABLE()
 
-#define VBUS_ADC_CHANNEL                ADC_CHANNEL_11
+#define VBUS_ADC_CHANNEL                ADC_CHANNEL_14
 
 #define GET_VBUS_VAL(val)               (((float)val-(float)1.24f) * (float)37.0f)      // 电压最大值（测量电压是电源电压的1/500）
 
